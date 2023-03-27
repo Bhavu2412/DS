@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node * next;
+};
+void transversal(struct node *ptr){
+    while(ptr!=NULL){
+        printf("%d\n",ptr->data);
+        ptr=ptr->next;
+    }
+}
+struct node * deletionatstart(struct node *head){
+    struct node * ptr=head;
+    head=head->next;
+    free(ptr);
+    return head;
+}
+struct node *deletionatmid(struct node *head,int index){
+    int i=0;
+    struct node * p=head;
+    while(i!=index-1){
+        p=p->next;
+        i++;
+    }
+    struct node * q=p->next;
+    p->next=q->next;
+    free(q);
+    return head;
+}
+struct node * deletionwithvalue(struct node * head,int dt){
+    struct node *p=head;
+    struct node *q=head->next;
+    while(q->data!=dt || q->next==NULL){
+        p=p->next;
+        q=q->next;
+    }
+    if(q->data==dt){
+        p->next=q->next;
+        free(q);
+    }
+    return head;
+}
+struct node * deletionatend(struct node * head){
+    struct node *p=head;
+    struct node *q=head->next;
+    while(q->next!=NULL){
+        p=p->next;
+        q=q->next;
+    }
+    p->next=NULL;
+    free(q);
+    return head;
+}
+int main(){
+    struct node * head=(struct node *)malloc(sizeof(struct node));
+    struct node * first=(struct node *)malloc(sizeof(struct node));
+    struct node * second=(struct node *)malloc(sizeof(struct node));
+    struct node * third=(struct node *)malloc(sizeof(struct node));
+    struct node * fourth=(struct node *)malloc(sizeof(struct node));
+    struct node * fifth=(struct node *)malloc(sizeof(struct node));
+    head->data=1;
+    first->data=2;
+    second->data=3;
+    third->data=4;
+    fourth->data=5;
+    fifth->data=6;
+    head->next=first;
+    first->next=second;
+    second->next=third;
+    third->next=fourth;
+    fourth->next=fifth;
+    fifth->next=NULL;
+    deletionwithvalue(head,5);
+    //head=deletionatstart(head);
+    //deletionatmid(head,2);
+    //deletionatend(head);
+    transversal(head);
+}

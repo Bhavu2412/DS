@@ -1,0 +1,95 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node * next;
+}; 
+void linkedlist(struct Node *ptr){
+    do{
+        printf("%d\n",ptr->data);
+        ptr=ptr->next;
+    }while(ptr!=NULL);
+}
+struct Node * addstart(struct Node *head,int dt){
+    struct Node *addition=(struct Node *)malloc(sizeof(struct Node));
+    addition-> data=dt;
+    addition-> next=head;
+    return addition;
+}
+struct Node *insertindex(struct Node * head,int dt,int index){
+    struct Node *addition=(struct Node *)malloc(sizeof(struct Node));
+    struct Node *p=head;
+    int i=0;
+    while(i!=index-1){
+        p=p->next;
+        i++;
+    }
+    addition-> data=dt;
+    addition->next=p->next;
+    p->next=addition;
+    return head;
+}
+struct Node *insertafternode(struct Node * head,int dt,struct Node *ptr){
+    struct Node *addition=(struct Node *)malloc(sizeof(struct Node));
+    struct Node *p=head;
+    int i=0;
+    addition-> data=dt;
+    p->next=addition;
+    addition->next=ptr->next;
+    return head;
+}
+struct Node *insertend(struct Node * head,int dt){
+    struct Node *ptr;
+    struct Node *addition=(struct Node *)malloc(sizeof(struct Node));
+    struct Node *p=head;
+    
+    while(p->next!=NULL){
+        p=p->next;
+        
+    }
+    p->next = addition;
+    addition-> data=dt;
+    addition->next=NULL;
+
+    return head;
+}
+int main(){
+    struct Node *head;
+    struct Node *second;
+    struct Node *third;
+    struct Node *last;
+    int b;
+    head=(struct Node *)malloc(sizeof(struct Node));
+    second=(struct Node *)malloc(sizeof(struct Node));
+    third=(struct Node *)malloc(sizeof(struct Node));
+    last=(struct Node *)malloc(sizeof(struct Node));
+    
+    head -> data=1;
+    head -> next=second;
+    second -> data=2;
+    second -> next=third;
+    third -> data=3;
+    third -> next=last;
+    last -> data=12;
+    last -> next=NULL;
+    //linkedlist(head);
+    //head = addstart(head,7,1);
+    //head = insertindex(head,7,3);
+    //head = insertend(head,7);
+    insertafternode(head,7,second);
+    linkedlist(head);
+    //      To add at the start.
+    // printf("Enter the value of new data to be added first :");
+    // scanf("%d",&b);
+    
+    // a=add;
+    // linkedlist(a);
+
+    //      To add at the end.
+    // printf("Enter the value of new data to be added last :");
+    // scanf("%d",&b);
+    // last -> next=add;
+    // add -> data=b;
+    // add -> next=NULL;
+    // linkedlist(a);
+}

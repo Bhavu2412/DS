@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+};
+void print(struct node *ptr){
+    while(ptr!=NULL){
+        printf("%d\n",ptr->data);
+        ptr=ptr->next;
+    }
+}
+struct node * addatstart(struct node *head,int dt){
+    struct node *add;
+    add=(struct node *)malloc(sizeof(struct node));
+    add->data=dt;
+    add->next=head;
+    return add;
+}
+struct node *addatend(struct node *head,int dt){
+    struct node *add;
+    add=(struct node *)malloc(sizeof(struct node));
+    struct node *p=head;
+    while(p->next!=NULL){
+        p=p->next;
+    }
+    p->next=add;
+    add->data=dt;
+    add->next=NULL;
+    return head;
+}
+struct node *addatindex(struct node *head,int dt,int index){
+     struct node *add;
+    add=(struct node *)malloc(sizeof(struct node));
+    struct node * p=head;
+    int i=0;
+   while(i!=index-1){
+       p=p->next;
+       i++;
+   }
+
+}
+struct node *addafternode(struct node *head,int dt,struct node *ptr){
+     struct node *add;
+    add=(struct node *)malloc(sizeof(struct node));
+    add->data=dt;
+    add->next=ptr->next;
+    ptr->next=add;
+    return head;
+}
+int main(){
+    struct node *head;
+    head=(struct node *)malloc(sizeof(struct node));
+    struct node *first;
+    first=(struct node *)malloc(sizeof(struct node));
+    struct node *second;
+    second=(struct node *)malloc(sizeof(struct node));
+    struct node *third;
+    third=(struct node *)malloc(sizeof(struct node));
+    head-> data=1;
+    head->next=first;
+     first-> data=2;
+    first->next=second;
+    second-> data=3;
+    second->next=third;
+    third-> data=4;
+    third->next=NULL;
+    head=addatstart(head,7);
+    addatend(head,7);
+    addatindex(head,7,3);
+    addafternode(head,10,first);
+    print(head);
+    return 0;
+}
